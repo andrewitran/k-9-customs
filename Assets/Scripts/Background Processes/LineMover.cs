@@ -165,10 +165,10 @@ public class LineMover : MonoBehaviour
     {
         lineIsSet = false;
 
-        for (int i = 1; i < lineLength; ++i) 
+        for (int i = 0; i < lineLength - 1; ++i) 
         {
-            person[i - 1] = person[i];
-            luggage[i - 1] = luggage[i];
+            person[i] = person[i + 1];
+            luggage[i] = luggage[i + 1];
         }
 
         person[lineLength - 1] = GetPerson(spawnPosition);
