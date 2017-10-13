@@ -11,7 +11,6 @@ public class OrbGenerator : MonoBehaviour
     private const int maxEnergyOrbs = 3;
     private const int maxItemOrbs = 3;
     private const int maxTrapOrbs = 12;
-    private const float offsetTolerance = 0.05f; 
     
     [SerializeField]
     private GameObject energyOrbPrefab;
@@ -39,7 +38,7 @@ public class OrbGenerator : MonoBehaviour
 
     private OrbGenerator() 
     {
-        maxOrbOffset = Mathf.Max(Mathf.Abs(orbOffsetX.x), Mathf.Abs(orbOffsetY.y)) + offsetTolerance;
+        maxOrbOffset = Mathf.Max(Mathf.Abs(orbOffsetX.x), Mathf.Abs(orbOffsetY.y)); 
         itemOrbsThisRound = 1;
     }
 
@@ -155,7 +154,7 @@ public class OrbGenerator : MonoBehaviour
 
         GameObject obj = energyOrbPool.GetObject(energyOrbPositions[randomPosition], Quaternion.identity);
 
-        for (int i = 0; i < orbPositions.Count; ++i) 
+        for (int i = orbPositions.Count - 1; i >= 0; --i) 
         {
             if (orbPositions[i] == obj.transform.position) 
             {
@@ -165,7 +164,7 @@ public class OrbGenerator : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < itemOrbPositions.Count; ++i) 
+        for (int i = itemOrbPositions.Count - 1; i >= 0; --i) 
         {
             if (itemOrbPositions[i] == obj.transform.position) 
             {
@@ -175,14 +174,12 @@ public class OrbGenerator : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < energyOrbPositions.Count; ++i) 
+        for (int i = energyOrbPositions.Count - 1; i >= 0; --i) 
         {
-            // Prevents too many EnergyOrbs from being spawned right next to each other.
+            // Prevents EnergyOrbs from being spawned adjacent to each other.
             if ((energyOrbPositions[i] - obj.transform.position).magnitude <= maxOrbOffset) 
             {
                 energyOrbPositions.RemoveAt(i); 
-
-                i = 0;
             }
         }
     }
@@ -193,7 +190,7 @@ public class OrbGenerator : MonoBehaviour
 
         GameObject obj = itemOrbPool.GetObject(itemOrbPositions[randomPosition], Quaternion.identity);
 
-        for (int i = 0; i < orbPositions.Count; ++i) 
+        for (int i = orbPositions.Count - 1; i >= 0; --i) 
         {
             if (orbPositions[i] == obj.transform.position) 
             {
@@ -203,7 +200,7 @@ public class OrbGenerator : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < energyOrbPositions.Count; ++i) 
+        for (int i = energyOrbPositions.Count - 1; i >= 0; --i) 
         {
             if (energyOrbPositions[i] == obj.transform.position) 
             {
@@ -213,14 +210,12 @@ public class OrbGenerator : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < itemOrbPositions.Count; ++i) 
+        for (int i = itemOrbPositions.Count - 1; i >= 0; --i) 
         {
-            // Prevents too many ItemOrbs from being spawned right next to each other.
+            // Prevents ItemOrbs from being spawned adjacent to each other.
             if ((itemOrbPositions[i] - obj.transform.position).magnitude <= maxOrbOffset) 
             {
                 itemOrbPositions.RemoveAt(i); 
-
-                i = 0;
             }
         }
     }
@@ -231,7 +226,7 @@ public class OrbGenerator : MonoBehaviour
 
         GameObject obj = trapOrbPool.GetObject(orbPositions[randomPosition], Quaternion.identity);
 
-        for (int i = 0; i < energyOrbPositions.Count; ++i) 
+        for (int i = energyOrbPositions.Count - 1; i >= 0; --i) 
         {
             if (energyOrbPositions[i] == obj.transform.position) 
             {
@@ -241,7 +236,7 @@ public class OrbGenerator : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < itemOrbPositions.Count; ++i) 
+        for (int i = itemOrbPositions.Count - 1; i >= 0; --i) 
         {
             if (itemOrbPositions[i] == obj.transform.position) 
             {
