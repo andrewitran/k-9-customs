@@ -13,7 +13,7 @@ public class TrapBullet : LaunchedObject
     {
         launchDirection = transform.right;
 
-        if (StatsTracker.Instance.Level == 24) 
+        if (StatsTracker.Instance.Level >= 24 && launchSpeed != 175)
         {
             launchSpeed = 175;
         }
