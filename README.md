@@ -1,5 +1,5 @@
 # K-9 Customs: Sniffin' Out Trouble!
-A game jam game made for the itch.io Short and Sweet Jam. <br />
+A game jam game made for the itch.io "Short and Sweet Jam." <br />
 Best run in 614x654.
 
 Programming by Andrew I. Tran. <br />
