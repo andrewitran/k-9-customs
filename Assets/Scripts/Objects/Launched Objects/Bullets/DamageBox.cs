@@ -7,12 +7,12 @@ public class DamageBox : PooledObject
     private const float orbTolerance = 0.3f;
 
     private List<Target> targets = new List<Target>();
-    private bool cloudWasHit;
+    private bool hasDestroyedACloud;
 
     private void OnEnable() 
     {
         targets.Clear();
-        cloudWasHit = false;
+        hasDestroyedACloud = false;
 
         EventManager.Instance.BulletEnd += OnBulletEnd;
     }
@@ -39,16 +39,16 @@ public class DamageBox : PooledObject
 
     public void Damage(int damage) 
     {
-        for (int i = targets.Count - 1; i >= 0; --i) 
+        for (int i = 0; i < targets.Count; ++i) 
         {
             if (targets[i].gameObject.activeInHierarchy) 
             {
                 targets[i].Damage(damage);
             }
 
-            if (targets[i].gameObject.tag == "Cloud" && !cloudWasHit && targets[i].health <= 0) 
+            if (targets[i].gameObject.tag == "Cloud" && !hasDestroyedACloud && targets[i].health <= 0) 
             {
-                cloudWasHit = true;
+                hasDestroyedACloud = true;
                 EventManager.Instance.OnCloudDestroyed();
             }
         }
